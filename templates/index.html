@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block title %}M8000配料单{% endblock %}
+{% block container %}
+<div class="col-lg-6 responsive-md-100">
+    <div class="card card-outline-primary">
+        <div class="card-header"><h4 class="m-b-0 text-white">配料任务</h4></div>
+    <div class="card-body">
+        <form method="post" class="form" action="/charge_sheet">
+            {{ form.hidden_tag() }}
+            <div class="form-body">
+                <h3 class="box-title m-t-40">M8000系列标件</h3><hr>
+                <div class="row">
+                    <div class="col-md-6 ">
+                        <div class="form-group"><label>大功率-防爆</label>{{ form.m8d(class="form-control") }}</div>
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="form-group"><label>大功率-普通</label>{{ form.m8(class="form-control") }}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group"><label>M825-防爆</label>{{ form.m825d(class="form-control") }}</div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group"><label>M825-普通</label>{{ form.m825(class="form-control") }}</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group"><label>M808-防爆</label>{{ form.m808d(class="form-control") }}</div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group"><label>M808-普通</label>{{ form.m808(class="form-control") }}</div>
+                    </div>
+                </div>
+                <div class="form-actions">{{ form.submit(class="btn btn-success") }}</div>
+            </div>
+        </form>
+    </div>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+<script src="{{ url_for('static',filename="js/lib/jquery/jquery.min.js") }}"></script>
+<script src="{{ url_for('static',filename="js/lib/bootstrap/js/popper.min.js") }}"></script>
+<script src="{{ url_for('static',filename="js/lib/bootstrap/js/bootstrap.min.js") }}"></script>
+<script src="{{ url_for('static',filename="js/jquery.slimscroll.js") }}"></script>
+<script src="{{ url_for('static',filename="js/sidebarmenu.js") }}"></script>
+<script src="{{ url_for('static',filename="js/lib/sticky-kit-master/dist/sticky-kit.min.js") }}"></script>
+<script src="{{ url_for('static',filename="js/lib/webticker/jquery.webticker.min.js") }}"></script>
+<script src="{{ url_for('static',filename="js/lib/peitychart/jquery.peity.min.js") }}"></script>
+<script src="{{ url_for('static',filename="js/custom.min.js") }}"></script>
+<script src="{{ url_for('static',filename="js/dashboard-1.js") }}"></script>
+{% endblock %}

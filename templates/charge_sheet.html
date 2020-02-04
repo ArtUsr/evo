@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+{% block title %}M8000配料单{% endblock %}
+
+{% block container %}
+<div class="col-12">
+    <div class="card">
+        <div class="card-body">
+        <h4 class="card-title">配料单-M8000</h4>
+        <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6>
+            <div class="table-responsive m-t-40">
+                <form class="form">
+                    <table id="example" class="table display table-bordered table-striped">
+                        <thead>
+                            <tr>
+                            <th>图号</th>
+                                <th>物料规格</th>
+                                    <th>物料接收位置</th>
+                                <th>发料数量</th>
+                            <th>产品类型</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                            <tr>
+                            <th>图号</th>
+                                <th>物料规格</th>
+                                    <th>物料接收位置</th>
+                                <th>发料数量</th>
+                            <th>产品类型</th>
+                            </tr>
+                            </tfoot>
+                        <tbody>
+                        {% for i in sheets %}
+                        <tr>
+                        <td>{{ i.dwg_num }}</td>
+                        <td>{{ i.dwg_norm }}</td>
+                        <td>{{ i.rec_local }}</td>
+                        {% if i.rec_local == '刘洪伟' %}
+                                {% if i.type == 'm8' %}
+                                <td>{{ i.rec_Quantity * (cs_m8+cs_m8d)}}</td>
+                                {% elif i.type == 'm825' %}
+                                    <td>{{ i.rec_Quantity * (cs_m825+cs_m825d)}}</td>
+                                {% else %}
+                                    <td>{{ i.rec_Quantity * (cs_m808+cs_m808d)}}</td>
+                                {% endif %}
+                            {% else %}
+                            {% if i.type == 'm8' %}
+                                <td>{{ i.rec_Quantity * cs_m8}}</td>
+                                {% elif i.type == 'm8d' %}
+                                    <td>{{ i.rec_Quantity * cs_m8d}}</td>
+                                {% elif i.type == 'm825' %}
+                                    <td>{{ i.rec_Quantity * cs_m825}}</td>
+                                {% elif i.type == 'm825d' %}
+                                    <td>{{ i.rec_Quantity * cs_m825d}}</td>
+                                {% elif i.type == 'm808' %}
+                                    <td>{{ i.rec_Quantity * cs_m808}}</td>
+                                {% else %}
+                                    <td>{{ i.rec_Quantity * cs_m808d}}</td>
+                            {% endif %}
+                        {% endif %}
+                            <td>{{ i.type }}</td>
+                        </tr>
+                        {#{% if i.rec_Quantity >0  %}#}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{{ url_for('static',filename="js/lib/datatables/datatables-init.js") }}
+{% block js %}
+<script src="{{ url_for('static',filename="js/lib/jquery/jquery.min.js") }}"></script>
+<script src="{{ url_for('static',filename="js/lib/bootstrap/js/popper.min.js") }}"></script>
+<script src="{{ url_for('static',filename="js/lib/bootstrap/js/bootstrap.min.js") }}"></script>
+<script src="{{ url_for('static',filename="js/jquery.slimscroll.js") }}"></script>
+<script src="{{ url_for('static',filename="js/sidebarmenu.js") }}"></script>
+<script src="{{ url_for('static',filename="js/lib/sticky-kit-master/dist/sticky-kit.min.js") }}"></script>
+<script src="{{ url_for('static',filename="js/custom.min.js") }}"></script>
+<script src="{{ url_for('static',filename="js/lib/datatables/datatables.min.js") }}"></script>
+<script src="{{ url_for('static',filename="js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js") }}"></script>
+<script src="{{ url_for('static',filename="js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js") }}"></script>
+<script src="{{ url_for('static',filename="js/lib/datatables/cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js") }}"></script>
+<script src="{{ url_for('static',filename="js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js") }}"></script>
+<script src="{{ url_for('static',filename="js/lib/datatables/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js") }}"></script>
+<script src="{{ url_for('static',filename="js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js") }}"></script>
+<script src="{{ url_for('static',filename="js/lib/datatables/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js") }}"></script>
+<script src="{{ url_for('static',filename="js/lib/datatables/datatables-init.js") }}"></script>
+{% endblock %}
